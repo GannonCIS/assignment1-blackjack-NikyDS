@@ -15,7 +15,8 @@ public class BlackJack {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Deck myDeck = new Deck();
+        myDeck.printDeck();
     }
     
 }
