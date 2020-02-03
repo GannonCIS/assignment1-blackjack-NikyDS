@@ -16,7 +16,10 @@ public class BlackJack {
      */
     public static void main(String[] args) {
         Deck myDeck = new Deck();
-        myDeck.printDeck();
+        for(int i = 0; i < 54; i++){
+            Card temp = myDeck.dealCard();
+            System.out.println(temp.RANK + "-of-" + temp.SUIT);
+        }
     }
     
 }
