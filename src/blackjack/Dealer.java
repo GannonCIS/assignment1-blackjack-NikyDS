@@ -56,7 +56,20 @@ public class Dealer {
     }
     
     public void declareWinners(){
-        
+        for(Player currPlayer : myPlayers){
+            if(dealerHand.getScore() > 21 && 
+                    currPlayer.getMyHand().getScore() < 21){
+                System.out.println(currPlayer.getName()+ " Wins- Dealer Busted");
+            }else if(dealerHand.getScore() < currPlayer.getMyHand().getScore()
+                    && currPlayer.getMyHand().getScore() < 21){
+                System.out.println(currPlayer.getName() + " Wins- Beat the Dealer");
+            }else if(currPlayer.getMyHand().getScore() == 21){
+                System.out.println(currPlayer.getName() + " Wins- Blackjack");
+            }else {
+                System.out.println(currPlayer.getName() + " Loses- Better Luck"
+                        + " Next Time");
+            }
+        }
     }
    
     private void initMyPlayers(int numPlayers) {
