@@ -20,6 +20,8 @@ public class Dealer {
     public Dealer(int numOfPlayers){
         
         initMyPlayers(numOfPlayers);
+        dealOutOpeningHand();
+        takePlayerTurns();
         
     }
     
@@ -38,21 +40,32 @@ public class Dealer {
                     currPlayer.getMyHand().getScore() < 21){
                 System.out.println(currPlayer.getName() + "'s Hand");
                 currPlayer.getMyHand().printHand();
+                System.out.println(currPlayer.getName() + "'s Score:");
+                currPlayer.getMyHand().printScore();
                 System.out.println("Wanna Hit? (y/n)");
                 char opt = scan.next().charAt(0);
                 if(opt == 'y'){
                     currPlayer.getMyHand().addCard(myDeck.dealCard());
+                }else{
+                    break;
                 }
             }
             currPlayer.getMyHand().printHand();
+            System.out.println(currPlayer.getName() + "'s Score:");
+            currPlayer.getMyHand().printScore();
         }
+        playOutDealerHand();
+        declareWinners();
     }
     
     public void playOutDealerHand(){
         while(dealerHand.getScore() < 16){
             dealerHand.addCard(myDeck.dealCard());
         }
+        System.out.println("Dealer's Hand:");
         dealerHand.printHand();
+        System.out.println("Dealer's Score: ");
+        dealerHand.printScore();
     }
     
     public void declareWinners(){
@@ -75,9 +88,10 @@ public class Dealer {
     private void initMyPlayers(int numPlayers) {
         myPlayers = new Player[numPlayers];
         for(int i = 0; i < myPlayers.length; i++){
-            System.out.println("Player " + (i+1) + "what's your name: ");
+            System.out.println("Player " + (i+1) + " what's your name or press"
+                    + " n if you do not want a name:");
             String name = scan.next();
-            if(name.equals("")){
+            if(name.equals("n")){
                 myPlayers[i] = new Player(i+1);
             }else{
                 myPlayers[i] = new Player(name);

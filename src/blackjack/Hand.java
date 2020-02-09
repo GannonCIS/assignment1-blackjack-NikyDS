@@ -24,6 +24,11 @@ public class Hand {
         return score;
     }
     
+    public int printScore(){
+        System.out.println(score);
+        return score;
+    }
+    
     public void addCard(Card newCard){
         if(numOfCards > 4 ){
             System.out.println("Too many cards for this hand");
@@ -45,7 +50,7 @@ public class Hand {
     }
     
     public void printHand(){
-        for(int i = 0; i < myCards.length; i++){
+        for(int i = 0; i < numOfCards; i++){
             System.out.println(myCards[i].RANK + " of " + myCards[i].SUIT);
         }
     }
