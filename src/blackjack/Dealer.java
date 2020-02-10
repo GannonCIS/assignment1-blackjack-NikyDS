@@ -20,9 +20,12 @@ public class Dealer {
     public Dealer(int numOfPlayers){
         
         initMyPlayers(numOfPlayers);
+        
+        
+    }
+    public void playGame(){
         dealOutOpeningHand();
         takePlayerTurns();
-        
     }
     
     public void dealOutOpeningHand(){
@@ -34,6 +37,8 @@ public class Dealer {
             if( i < 1){
             System.out.println("Dealer's Hand");
             dealerHand.printHand();
+                System.out.println("Dealer's Score: " + dealerHand.getScore() 
+                + "\n");
             }
         }
     }
@@ -50,13 +55,16 @@ public class Dealer {
                 char opt = scan.next().charAt(0);
                 if(opt == 'y'){
                     currPlayer.getMyHand().addCard(myDeck.dealCard());
+                    //currPlayer.getMyHand().changeAce(currPlayer);
                 }else{
+                    System.out.println("\n");
                     break;
                 }
+                
             }
             currPlayer.getMyHand().printHand();
-            System.out.println(currPlayer.getName() + "'s Score:");
-            currPlayer.getMyHand().printScore();
+            System.out.println(currPlayer.getName() + "'s Score: " + 
+                    currPlayer.getMyHand().getScore() + "\n");
         }
         playOutDealerHand();
         declareWinners();
@@ -68,24 +76,39 @@ public class Dealer {
         }
         System.out.println("Dealer's Hand:");
         dealerHand.printHand();
-        System.out.println("Dealer's Score: ");
-        dealerHand.printScore();
+        System.out.println("Dealer's Score: " + dealerHand.getScore() +
+                "\n");
     }
     
     
     public void declareWinners(){
         for(Player currPlayer : myPlayers){
-            if(dealerHand.getScore() > 21 && 
-                    currPlayer.getMyHand().getScore() < 21){
-                System.out.println(currPlayer.getName()+ " Wins- Dealer Busted");
-            }else if(dealerHand.getScore() < currPlayer.getMyHand().getScore()
-                    && currPlayer.getMyHand().getScore() < 21){
-                System.out.println(currPlayer.getName() + " Wins- Beat the Dealer");
-            }else if(currPlayer.getMyHand().getScore() == 21){
-                System.out.println(currPlayer.getName() + " Wins- Blackjack");
-            }else {
-                System.out.println(currPlayer.getName() + " Loses- Better Luck"
-                        + " Next Time");
+            if(dealerHand.getScore()> 21 || 
+                    currPlayer.getMyHand().getScore() > 21){
+                if(currPlayer.getMyHand().getScore() > 21){
+                    System.out.println(currPlayer.getName() + "'s Score = " + 
+                        currPlayer.getMyHand().getScore() + " You Busted "
+                            + "Loser");
+                }else{
+                    System.out.println(currPlayer.getName() +"'s Score = " + 
+                        currPlayer.getMyHand().getScore()+ " Dealer Busted"
+                            +  " You Win");
+                }
+            }else if(dealerHand.getScore()==21 || dealerHand.getNumOfCards()>4){
+                System.out.println(currPlayer.getName() + "'s Score = " + 
+                        currPlayer.getMyHand().getScore()+
+                        "Dealer Wins!!! You Lose...");
+            }else if(currPlayer.getMyHand().getNumOfCards()>4){
+                System.out.println(currPlayer.getName() + "'s Score = " + 
+                        currPlayer.getMyHand().getScore()+ " Nice Hand"
+                        + " You Win");
+            }else if(currPlayer.getMyHand().getScore() > dealerHand.getScore()){
+                System.out.println(currPlayer.getName() + "'s Score = " + 
+                        currPlayer.getMyHand().getScore() + " Beat the Dealer"
+                        + " You Win");
+            }else{
+                System.out.println(currPlayer.getName() + "'s Score = " + 
+                        currPlayer.getMyHand().getScore()+" Dealer Beat You");
             }
         }
     }

@@ -24,11 +24,9 @@ public class Hand {
         return score;
     }
     
-    public int printScore(){
+    public void printScore(){
         System.out.println(score);
-        return score;
     }
-    
     public void addCard(Card newCard){
         if(numOfCards > 4 ){
             System.out.println("Too many cards for this hand");
@@ -55,4 +53,14 @@ public class Hand {
             System.out.println(myCards[i].RANK + " of " + myCards[i].SUIT);
         }
     }
+   /* public void changeAce(Player currPlayer){
+        for(int i = 0; i<numOfCards; i++){
+            if(myCards[i].RANK.equals("Ace")){
+                if(currPlayer.getMyHand().getScore()>21){
+                    score -=10;
+                    break;
+                }
+            }
+        }
+    } */
 }
