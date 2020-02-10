@@ -31,6 +31,10 @@ public class Dealer {
                 currPlayer.getMyHand().addCard(myDeck.dealCard());
             }
             dealerHand.addCard(myDeck.dealCard());
+            if( i < 1){
+            System.out.println("Dealer's Hand");
+            dealerHand.printHand();
+            }
         }
     }
     
@@ -68,6 +72,7 @@ public class Dealer {
         dealerHand.printScore();
     }
     
+    
     public void declareWinners(){
         for(Player currPlayer : myPlayers){
             if(dealerHand.getScore() > 21 && 
@@ -88,10 +93,9 @@ public class Dealer {
     private void initMyPlayers(int numPlayers) {
         myPlayers = new Player[numPlayers];
         for(int i = 0; i < myPlayers.length; i++){
-            System.out.println("Player " + (i+1) + " what's your name or press"
-                    + " n if you do not want a name:");
-            String name = scan.next();
-            if(name.equals("n")){
+            System.out.println("Player " + (i+1) + " what's your name: " );
+            String name = scan.nextLine();
+            if(name.equals("")){
                 myPlayers[i] = new Player(i+1);
             }else{
                 myPlayers[i] = new Player(name);
